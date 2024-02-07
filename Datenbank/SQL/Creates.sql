@@ -10,8 +10,9 @@ CREATE TABLE IF NOT EXISTS 'Mitglied'(
 	'TelefonNR' char(20),
 	'E-Mail' char(50) NOT NULL,
 	'Adresse' char(100) NOT NULL,
-	'Abteilungs_ID' INT,
-	'Passwort' char(10) PRIMARY KEY,
+	'Abteilungs_ID' INT DEFAULT NULL,
+	'Passwort' char(10) NOT NULL,
+	'Verwalter' int(1) NOT NULL,
 	FOREIGN KEY('Abteilungs_ID') REFERENCES VereinsAbteilung(VA_ID)
 );
 
@@ -35,3 +36,4 @@ CREATE TABLE IF NOT EXISTS 'EhemaligesMitglied'(
 	'M_ID' INT NOT NULL,
 	FOREIGN KEY('M_ID') REFERENCES Mitglied('M_ID')
 );
+
