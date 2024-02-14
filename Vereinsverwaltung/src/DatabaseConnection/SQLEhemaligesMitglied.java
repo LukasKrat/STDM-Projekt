@@ -34,7 +34,7 @@ public class SQLEhemaligesMitglied {
             while (resultSet.next()) {
                     int id = resultSet.getInt("pm.EM_ID");
                     String vorname = resultSet.getString("m.Vorname");
-                    String nachname = resultSet.getString("Nachname");
+                    String nachname = resultSet.getString("m.Nachname");
                     String telefonNr = resultSet.getString("m.TelefonNR");
                     String email = resultSet.getString("m.E-Mail");
                     String adresse = resultSet.getString("m.Adresse");

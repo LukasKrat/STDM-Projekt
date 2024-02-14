@@ -24,18 +24,19 @@ public class SQLPassivesMitglied {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                    int id = resultSet.getInt("M_ID");
+                    int id = resultSet.getInt("pm.PM_ID");
                     String vorname = resultSet.getString("m.Vorname");
                     String nachname = resultSet.getString("Nachname");
                     String telefonNr = resultSet.getString("m.TelefonNR");
                     String email = resultSet.getString("m.E-Mail");
                     String adresse = resultSet.getString("m.Adresse");
-                    Date inaktivSeit = resultSet.getDate("inaktivSeit");
-                    int abteilungsId = resultSet.getInt("Abteilungs_ID");
-                    String passwort = resultSet.getString("Passwort");
-                    boolean verwalter = resultSet.getBoolean("Verwalter");
+                    Date inaktivSeit = resultSet.getDate("pm.inaktivSeit");
+                    int abteilungsId = resultSet.getInt("m.Abteilungs_ID");
+                    String passwort = resultSet.getString("m.Passwort");
+                    boolean verwalter = resultSet.getBoolean("m.Verwalter");
+                    int mitgliedId = resultSet.getInt("m.M_ID");
                 
-                PassivesMitglied obj = new PassivesMitglied(id, inaktivSeit, vorname, nachname, telefonNr, email, adresse, abteilungsId, abteilungsId, verwalter, passwort);
+                PassivesMitglied obj = new PassivesMitglied(id, inaktivSeit, vorname, nachname, telefonNr, email, adresse, abteilungsId, mitgliedId, verwalter, passwort);
                 Result.add(obj);
             }
         } catch (SQLException e) {
