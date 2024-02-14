@@ -33,9 +33,9 @@ public class SQLPassivesMitglied {
                     Date inaktivSeit = resultSet.getDate("inaktivSeit");
                     int abteilungsId = resultSet.getInt("Abteilungs_ID");
                     String passwort = resultSet.getString("Passwort");
-                    int verwalter = resultSet.getInt("Verwalter");
+                    boolean verwalter = resultSet.getBoolean("Verwalter");
                 
-                PassivesMitglied obj = new PassivesMitglied(id, inaktivSeit, vorname, nachname, telefonNr, email, adresse, abteilungsId, abteilungsId, true, passwort);
+                PassivesMitglied obj = new PassivesMitglied(id, inaktivSeit, vorname, nachname, telefonNr, email, adresse, abteilungsId, abteilungsId, verwalter, passwort);
                 Result.add(obj);
             }
         } catch (SQLException e) {
