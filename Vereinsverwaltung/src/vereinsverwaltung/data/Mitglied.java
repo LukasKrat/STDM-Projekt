@@ -10,7 +10,8 @@ package vereinsverwaltung.data;
  */
 public class Mitglied {
     private int id;
-    private String name;
+    private String vorname;
+    private String nachname;
     private String telefon;
     private String email;
     private int abteilung_id;
@@ -50,12 +51,12 @@ public class Mitglied {
         this.passwort = passwort;
     }
     
-    public String getName() {
-        return name;
+    public String getVorname() {
+        return vorname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
     }
 
     public String getTelefon() {
@@ -81,9 +82,17 @@ public class Mitglied {
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
+    }
     
-    public Mitglied(String name, String telefon, String email, String adresse, int abteilung_id, int id, boolean istVerwalter, String passwort) {
-        this.name = name;
+    public Mitglied(String vorname, String nachname, String telefon, String email, String adresse, int abteilung_id, int id, boolean istVerwalter, String passwort) {
+        this.vorname = vorname;
         this.telefon = telefon;
         this.email = email;
         this.adresse = adresse;
@@ -91,5 +100,6 @@ public class Mitglied {
         this.id = id;
         this.istVerwalter = istVerwalter;
         this.passwort = passwort;
+        this.nachname = nachname;
     }
 }
