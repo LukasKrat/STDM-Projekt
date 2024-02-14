@@ -7,14 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 /**
  *
  * @author Nikita
  */
 public class SQLMitglied {
     public static void main(String[] args) {
-        String dbPath = "/111.db"; //must write the path 
-        Connection connection = SQLiteConnection.connect(dbPath);
+        Connection connection = new SQLConnection().activeVerbindung;
 
         String query = "SELECT * FROM Mitglied;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);

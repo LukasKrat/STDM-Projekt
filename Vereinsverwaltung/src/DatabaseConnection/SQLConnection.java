@@ -11,7 +11,10 @@ import java.sql.SQLException;
  * @author Nikita
  */
 public class SQLConnection {
-        public static Connection connect(String dbPath) {
+        public static String dbPath = "/111.db"; //must write the path 
+        public static Connection activeVerbindung = null;
+        
+        private Connection connect(String dbPath) {
         Connection connection = null;
         try {
             String url = "jdbc:sqlite:" + dbPath;
@@ -22,4 +25,9 @@ public class SQLConnection {
         }
         return connection;
     }
+        public SQLConnection (){
+            if(activeVerbindung == null){
+                activeVerbindung = connect(dbPath);
+            }
+        }
 }
