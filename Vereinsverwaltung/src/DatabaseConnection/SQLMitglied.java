@@ -8,28 +8,37 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import vereinsverwaltung.data.Mitglied;
 
 /**
  *
  * @author Nikita
  */
 public class SQLMitglied {
-    public static ArrayList getAll (String[] args) {
+    public static ArrayList<Mitglied> getAll (String[] args) {
         Connection connection = new SQLConnection().activeVerbindung;
+        ArrayList<Mitglied> Result = new ArrayList<Mitglied>();
 
         String query = "SELECT * FROM Mitglied;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String surname = resultSet.getString("Nachname");
+                   // int id = resultSet.getInt("M_ID");
+                    String vorname = resultSet.getString("Vorname");
+                    //String nachname = resultSet.getString("Nachname");
+                    String telefonNr = resultSet.getString("TelefonNR");
+                    String email = resultSet.getString("E-Mail");
+                    String adresse = resultSet.getString("Adresse");
+                   // int abteilungsId = resultSet.getInt("Abteilungs_ID");
+                   // String passwort = resultSet.getString("Passwort");
+                   // int verwalter = resultSet.getInt("Verwalter");
                 
-                
+                Mitglied obj = new Mitglied(vorname, telefonNr, email, adresse);
             }
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());
         }
+        return Result;
     }
 }
 
