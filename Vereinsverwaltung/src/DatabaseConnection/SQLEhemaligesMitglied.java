@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import vereinsverwaltung.data.EhemaligesMitglied;
-import vereinsverwaltung.data.PassivesMitglied;
 
 /**
  *
