@@ -9,13 +9,19 @@ package vereinsverwaltung.data;
  * @author lukas
  */
 public class VereinsAbteilung {
+    private int id;
     private String name;
 
     public String getName() {
         return name;
     }
+
+    public int getId() {
+        return id;
+    }
     
-    public VereinsAbteilung(String name) {
+    public VereinsAbteilung(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 }
