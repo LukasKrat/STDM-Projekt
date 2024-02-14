@@ -23,18 +23,18 @@ public class SQLPassivesMitglied {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                    // int id = resultSet.getInt("M_ID");
+                    int id = resultSet.getInt("M_ID");
                     String vorname = resultSet.getString("m.Vorname");
-                    //String nachname = resultSet.getString("Nachname");
+                    String nachname = resultSet.getString("Nachname");
                     String telefonNr = resultSet.getString("m.TelefonNR");
                     String email = resultSet.getString("m.E-Mail");
                     String adresse = resultSet.getString("m.Adresse");
                     java.sql.Date inaktivSeit = resultSet.getDate("inaktivSeit");
-                    // int abteilungsId = resultSet.getInt("Abteilungs_ID");
-                    // String passwort = resultSet.getString("Passwort");
-                    // int verwalter = resultSet.getInt("Verwalter");
+                    int abteilungsId = resultSet.getInt("Abteilungs_ID");
+                    String passwort = resultSet.getString("Passwort");
+                    int verwalter = resultSet.getInt("Verwalter");
                 
-                PassivesMitglied obj = new PassivesMitglied(vorname, telefonNr, email, adresse, inaktivSeit);
+                PassivesMitglied obj = new PassivesMitglied(0, inaktivSeit, vorname, telefonNr, email, adresse, 0, 0, true, adresse)
             }
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());
