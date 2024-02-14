@@ -7,13 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author Nikita
  */
 public class SQLMitglied {
-    public static void main(String[] args) {
+    public static ArrayList getAll (String[] args) {
         Connection connection = new SQLConnection().activeVerbindung;
 
         String query = "SELECT * FROM Mitglied;";
@@ -22,6 +23,9 @@ public class SQLMitglied {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
+                String surname = resultSet.getString("Nachname");
+                
+                
             }
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());
