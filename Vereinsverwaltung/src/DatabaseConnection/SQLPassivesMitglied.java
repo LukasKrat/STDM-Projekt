@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import vereinsverwaltung.data.PassivesMitglied;
 
 /**
@@ -29,12 +30,13 @@ public class SQLPassivesMitglied {
                     String telefonNr = resultSet.getString("m.TelefonNR");
                     String email = resultSet.getString("m.E-Mail");
                     String adresse = resultSet.getString("m.Adresse");
-                    java.sql.Date inaktivSeit = resultSet.getDate("inaktivSeit");
+                    Date inaktivSeit = resultSet.getDate("inaktivSeit");
                     int abteilungsId = resultSet.getInt("Abteilungs_ID");
                     String passwort = resultSet.getString("Passwort");
                     int verwalter = resultSet.getInt("Verwalter");
                 
-                PassivesMitglied obj = new PassivesMitglied(0, inaktivSeit, vorname, telefonNr, email, adresse, 0, 0, true, adresse)
+                PassivesMitglied obj = new PassivesMitglied(id, inaktivSeit, vorname, nachname, telefonNr, email, adresse, abteilungsId, abteilungsId, true, passwort);
+                Result.add(obj);
             }
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());

@@ -25,7 +25,7 @@ public class SQLMitglied {
             while (resultSet.next()) {
                     int id = resultSet.getInt("M_ID");
                     String vorname = resultSet.getString("Vorname");
-                    //String nachname = resultSet.getString("Nachname");
+                    String nachname = resultSet.getString("Nachname");
                     String telefonNr = resultSet.getString("TelefonNR");
                     String email = resultSet.getString("E-Mail");
                     String adresse = resultSet.getString("Adresse");
@@ -33,7 +33,8 @@ public class SQLMitglied {
                     String passwort = resultSet.getString("Passwort");
                     boolean verwalter = resultSet.getBoolean("Verwalter");
                 
-                Mitglied obj = new Mitglied(vorname, telefonNr, email, adresse, abteilungsId, id, verwalter, passwort);
+                Mitglied obj = new Mitglied(vorname, nachname, telefonNr, email, adresse, abteilungsId, id, verwalter, passwort);
+                Result.add(obj);
             }
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());
