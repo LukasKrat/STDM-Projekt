@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import vereinsverwaltung.data.PassivesMitglied;
 
 /**
@@ -23,18 +24,19 @@ public class SQLPassivesMitglied {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                    // int id = resultSet.getInt("M_ID");
+                    int id = resultSet.getInt("M_ID");
                     String vorname = resultSet.getString("m.Vorname");
-                    //String nachname = resultSet.getString("Nachname");
+                    String nachname = resultSet.getString("Nachname");
                     String telefonNr = resultSet.getString("m.TelefonNR");
                     String email = resultSet.getString("m.E-Mail");
                     String adresse = resultSet.getString("m.Adresse");
-                    java.sql.Date inaktivSeit = resultSet.getDate("inaktivSeit");
-                    // int abteilungsId = resultSet.getInt("Abteilungs_ID");
-                    // String passwort = resultSet.getString("Passwort");
-                    // int verwalter = resultSet.getInt("Verwalter");
+                    Date inaktivSeit = resultSet.getDate("inaktivSeit");
+                    int abteilungsId = resultSet.getInt("Abteilungs_ID");
+                    String passwort = resultSet.getString("Passwort");
+                    int verwalter = resultSet.getInt("Verwalter");
                 
-                PassivesMitglied obj = new PassivesMitglied(vorname, telefonNr, email, adresse, inaktivSeit);
+                PassivesMitglied obj = new PassivesMitglied(id, inaktivSeit, vorname, nachname, telefonNr, email, adresse, abteilungsId, abteilungsId, true, passwort);
+                Result.add(obj);
             }
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());
