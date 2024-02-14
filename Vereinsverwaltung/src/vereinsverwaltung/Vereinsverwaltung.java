@@ -17,16 +17,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.ComboBoxModel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class Vereinsverwaltung extends JFrame {
 
     private JPanel contentPane;
     private JFrame vereinsBeitrittFrame;
     private JFrame verwalterAnmeldungFrame;
-
+    private JFrame manschaftBeitretenFrame;
+    private JFrame manschaftVerlassenFrame;
+            
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -72,7 +76,7 @@ public class Vereinsverwaltung extends JFrame {
         btnBeitreten.setFont(new Font("Arial", Font.PLAIN, 24));
         btnBeitreten.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Aktion: Mannschaft beitreten");
+                openMannschaftBeitretenFormular();
             }
         });
         btnBeitreten.setBounds(250, 260, 300, 50);
@@ -82,7 +86,7 @@ public class Vereinsverwaltung extends JFrame {
         btnVerlassen_1.setFont(new Font("Arial", Font.PLAIN, 24));
         btnVerlassen_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Aktion: Mannschaft verlassen");
+                openManschaftverlassenFormular();
             }
         });
         btnVerlassen_1.setBounds(250, 340, 300, 50);
@@ -229,4 +233,82 @@ public class Vereinsverwaltung extends JFrame {
 
         verwalterAnmeldungFrame.setVisible(true);
     }
+    
+    private void openMannschaftBeitretenFormular()
+    {
+        manschaftBeitretenFrame = new JFrame("Manschaft beitreten");
+        manschaftBeitretenFrame.setBounds(100,100,800,600);
+        JPanel panel = new JPanel();
+        manschaftBeitretenFrame.getContentPane().add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblEmail = new JLabel("E-Mail:");
+        lblEmail.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblEmail.setBounds(100, 100, 100, 20);
+        panel.add(lblEmail);
+
+        JTextField textFieldEmail = new JTextField();
+        textFieldEmail.setBounds(250, 100, 300, 30);
+        panel.add(textFieldEmail);
+        textFieldEmail.setColumns(10);
+
+        JLabel lblPasswort = new JLabel("Passwort:");
+        lblPasswort.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblPasswort.setBounds(100, 150, 100, 20);
+        panel.add(lblPasswort);
+
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setBounds(250, 150, 300, 30);
+        panel.add(passwordField);
+        
+        JLabel lblManschaft = new JLabel("Manschaft:");
+        lblManschaft.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblManschaft.setBounds(100, 200, 100, 20);
+        panel.add(lblManschaft);
+        
+        JComboBox comboboxManschaft = new JComboBox();
+        comboboxManschaft.setBounds(250, 200, 300, 30);
+        panel.add(comboboxManschaft);
+        
+        manschaftBeitretenFrame.setVisible(true);
+    } 
+    
+    private void openManschaftverlassenFormular()
+    {
+        manschaftVerlassenFrame = new JFrame("Manschaft verlassen");
+        manschaftVerlassenFrame.setBounds(100,100,800,600);
+        JPanel panel = new JPanel();
+        manschaftVerlassenFrame.getContentPane().add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblEmail = new JLabel("E-Mail:");
+        lblEmail.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblEmail.setBounds(100, 100, 100, 20);
+        panel.add(lblEmail);
+
+        JTextField textFieldEmail = new JTextField();
+        textFieldEmail.setBounds(250, 100, 300, 30);
+        panel.add(textFieldEmail);
+        textFieldEmail.setColumns(10);
+
+        JLabel lblPasswort = new JLabel("Passwort:");
+        lblPasswort.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblPasswort.setBounds(100, 150, 100, 20);
+        panel.add(lblPasswort);
+
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setBounds(250, 150, 300, 30);
+        panel.add(passwordField);
+        
+        JLabel lblManschaft = new JLabel("Manschaft:");
+        lblManschaft.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblManschaft.setBounds(100, 200, 100, 20);
+        panel.add(lblManschaft);
+        
+        JComboBox comboboxManschaft = new JComboBox();
+        comboboxManschaft.setBounds(250, 200, 300, 30);
+        panel.add(comboboxManschaft);
+        
+        manschaftVerlassenFrame.setVisible(true);
+    } 
 }
