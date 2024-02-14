@@ -9,22 +9,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import vereinsverwaltung.data.PassivesMitglied;
+import vereinsverwaltung.data.Trainer;
 
 /**
  *
  * @author Nikita
  */
-public class SQLPassivesMitglied {
-    public static ArrayList<PassivesMitglied> getAll (String[] args) {
+public class SQLTrainer {
+    public static ArrayList<Trainer> getAll (String[] args) {
         Connection connection = new SQLConnection().activeVerbindung;
-        ArrayList<PassivesMitglied> Result = new ArrayList<PassivesMitglied>();
+        ArrayList<Trainer> Result = new ArrayList<Trainer>();
 
-        String query = "SELECT * FROM PassivMitglied pm JOIN Mitglied m ON pm.M_ID = m.M_ID;";
+        String query = "SELECT * FROM Trainer pm JOIN Mitglied m ON pm.M_ID = m.M_ID;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                    int id = resultSet.getInt("M_ID");
+                    int id = resultSet.getInt("T_ID");
+                    String kompBereich = resultSet.getString("kompBereich");
                     String vorname = resultSet.getString("m.Vorname");
                     String nachname = resultSet.getString("Nachname");
                     String telefonNr = resultSet.getString("m.TelefonNR");
@@ -34,8 +35,9 @@ public class SQLPassivesMitglied {
                     int abteilungsId = resultSet.getInt("Abteilungs_ID");
                     String passwort = resultSet.getString("Passwort");
                     boolean verwalter = resultSet.getBoolean("Verwalter");
+                    int mId = resultSet.getInt("M_ID");
                 
-                PassivesMitglied obj = new PassivesMitglied(id, inaktivSeit, vorname, nachname, telefonNr, email, adresse, abteilungsId, abteilungsId, verwalter, passwort);
+                Trainer obj = new Trainer(id, kompBereich, vorname, nachname, telefonNr, email, adresse, abteilungsId, mId, verwalter, passwort);
                 Result.add(obj);
             }
         } catch (SQLException e) {
