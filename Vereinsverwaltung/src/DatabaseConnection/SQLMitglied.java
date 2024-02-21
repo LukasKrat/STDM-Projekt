@@ -15,7 +15,7 @@ import vereinsverwaltung.data.Mitglied;
  * @author Nikita
  */
 public class SQLMitglied {
-    public static ArrayList<Mitglied> getAll (String[] args) {
+    public static ArrayList<Mitglied> getAll () {
         Connection connection = new SQLConnection().activeVerbindung;
         ArrayList<Mitglied> Result = new ArrayList<Mitglied>();
 
