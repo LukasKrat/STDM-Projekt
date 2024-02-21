@@ -9,6 +9,7 @@ package vereinsverwaltung.data;
  * @author lukas
  */
 public class Mitglied {
+
     private int id;
     private String vorname;
     private String nachname;
@@ -82,7 +83,7 @@ public class Mitglied {
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
-
+  
     public String getNachname() {
         return nachname;
     }
