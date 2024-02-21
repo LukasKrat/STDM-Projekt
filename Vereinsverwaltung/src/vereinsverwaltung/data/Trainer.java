@@ -15,7 +15,7 @@ public class Trainer extends Mitglied {
     public String getKompetenzBereich() {
         return kompetenzBereich;
     }    
-
+  
     public int getId() {
         return id;
     }
