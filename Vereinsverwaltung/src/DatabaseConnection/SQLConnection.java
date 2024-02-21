@@ -5,22 +5,26 @@
 package DatabaseConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.*;
 import java.sql.SQLException;
+import org.sqlite.JDBC;
+
 /**
  *
  * @author Nikita
  */
 public class SQLConnection {
-        public static String dbPath = "/111.db"; //must write the path 
+        public static String dbPath = "./../Datenbank/Vereinsverwaltung.db"; //must write the path 
         public static Connection activeVerbindung = null;
         
         private Connection connect(String dbPath) {
         Connection connection = null;
         try {
             String url = "jdbc:sqlite:" + dbPath;
+            Class.forName(JDBC.class.getName());
             connection = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite successful");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println("Connection error: " + e.getMessage());
         }
         return connection;
