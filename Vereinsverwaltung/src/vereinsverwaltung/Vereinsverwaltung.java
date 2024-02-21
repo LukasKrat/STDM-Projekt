@@ -8,6 +8,7 @@ package vereinsverwaltung;
  *
  * @author PeerKrimphoff
  */
+import DatabaseConnection.SQLMitglied;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
