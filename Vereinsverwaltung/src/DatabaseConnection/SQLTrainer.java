@@ -8,32 +8,36 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import vereinsverwaltung.data.Mitglied;
+import java.util.Date;
+import vereinsverwaltung.data.Trainer;
 
 /**
  *
  * @author Nikita
  */
-public class SQLMitglied {
-    public static ArrayList<Mitglied> getAll (String[] args) {
+public class SQLTrainer {
+    public static ArrayList<Trainer> getAll (String[] args) {
         Connection connection = new SQLConnection().activeVerbindung;
-        ArrayList<Mitglied> Result = new ArrayList<Mitglied>();
+        ArrayList<Trainer> Result = new ArrayList<Trainer>();
 
-        String query = "SELECT * FROM Mitglied;";
+        String query = "SELECT * FROM Trainer pm JOIN Mitglied m ON pm.M_ID = m.M_ID;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                    int id = resultSet.getInt("M_ID");
-                    String vorname = resultSet.getString("Vorname");
+                    int id = resultSet.getInt("T_ID");
+                    String kompBereich = resultSet.getString("kompBereich");
+                    String vorname = resultSet.getString("m.Vorname");
                     String nachname = resultSet.getString("Nachname");
-                    String telefonNr = resultSet.getString("TelefonNR");
-                    String email = resultSet.getString("E-Mail");
-                    String adresse = resultSet.getString("Adresse");
+                    String telefonNr = resultSet.getString("m.TelefonNR");
+                    String email = resultSet.getString("m.E-Mail");
+                    String adresse = resultSet.getString("m.Adresse");
+                    Date inaktivSeit = resultSet.getDate("inaktivSeit");
                     int abteilungsId = resultSet.getInt("Abteilungs_ID");
                     String passwort = resultSet.getString("Passwort");
                     boolean verwalter = resultSet.getBoolean("Verwalter");
+                    int mId = resultSet.getInt("M_ID");
                 
-                Mitglied obj = new Mitglied(vorname, nachname, telefonNr, email, adresse, abteilungsId, id, verwalter, passwort);
+                Trainer obj = new Trainer(id, kompBereich, vorname, nachname, telefonNr, email, adresse, abteilungsId, mId, verwalter, passwort);
                 Result.add(obj);
             }
         } catch (SQLException e) {
