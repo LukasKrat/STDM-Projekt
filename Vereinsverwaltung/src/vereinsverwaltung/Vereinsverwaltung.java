@@ -224,6 +224,7 @@ public class Vereinsverwaltung extends JFrame {
                     // Hier können Sie den Code zur Überprüfung der Anmeldeinformationen des Verwalters implementieren
                     System.out.println("E-Mail: " + email + ", Passwort: " + passwort);
                     JOptionPane.showMessageDialog(null, "Erfolgreich als Verwalter angemeldet.");
+                    openAntragsBearbeitungsFenster(); // Öffnen Sie das Fenster zur Bearbeitung von Anträgen
                     verwalterAnmeldungFrame.dispose();
                 }
             }
@@ -233,6 +234,15 @@ public class Vereinsverwaltung extends JFrame {
 
         verwalterAnmeldungFrame.setVisible(true);
     }
+    
+    private void openAntragsBearbeitungsFenster() {
+        JFrame antragsBearbeitungFrame = new JFrame("Antragsbearbeitung");
+        antragsBearbeitungFrame.setBounds(100, 100, 800, 600);
+        // Hier können Sie die Benutzeroberfläche für das Fenster zur Bearbeitung von Anträgen erstellen
+        // Zum Beispiel: Schaltflächen zum Genehmigen oder Ablehnen von Anträgen
+        antragsBearbeitungFrame.setVisible(true);
+    }
+
     
     private void openMannschaftBeitretenFormular()
     {
