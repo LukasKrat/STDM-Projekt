@@ -79,5 +79,21 @@ public class SQLVerwaltung {
         }
         return null;
     }
+    
+    public static VereinsAbteilung delete (int VA_ID) {
+        Connection connection = new SQLConnection().activeVerbindung;
+
+        String query = "DELETE FROM VereinsAbteilung WHERE VA_ID=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, VA_ID);
+            preparedStatement.executeUpdate();
+            System.out.println("Removal was successful");
+
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return null;
+    }
 }
 
