@@ -18,7 +18,7 @@ import vereinsverwaltung.data.VereinsAbteilung;
  * @author Nikita
  */
 public class SQLVerwaltung {
-    public static ArrayList<VereinsAbteilung> getAll (String[] args) {
+    public static ArrayList<VereinsAbteilung> getAll () {
         Connection connection = new SQLConnection().activeVerbindung;
         ArrayList<VereinsAbteilung> Result = new ArrayList<VereinsAbteilung>();
 
