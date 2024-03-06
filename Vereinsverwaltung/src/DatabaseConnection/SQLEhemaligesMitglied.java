@@ -103,4 +103,20 @@ public class SQLEhemaligesMitglied {
         }
         return null;
     }
+    
+    public static EhemaligesMitglied delete (int EM_ID) {
+        Connection connection = new SQLConnection().activeVerbindung;
+
+        String query = "DELETE FROM EhemaligesMitglied WHERE EM_ID=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, EM_ID);
+            preparedStatement.executeUpdate();
+            System.out.println("Removal was successful");
+
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return null;
+    }
 }
