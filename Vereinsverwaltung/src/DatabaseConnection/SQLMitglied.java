@@ -90,8 +90,6 @@ public class SQLMitglied {
          
             Mitglied newMitglied = getByEmail(email).get(0);
             
-            connection.close();
-            
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());
         }
