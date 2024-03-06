@@ -30,6 +30,7 @@ public class Vereinsverwaltung extends JFrame {
     private JFrame verwalterAnmeldungFrame;
     private JFrame manschaftBeitretenFrame;
     private JFrame manschaftVerlassenFrame;
+    private JFrame VereinVerlassenFrame;
             
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -66,7 +67,7 @@ public class Vereinsverwaltung extends JFrame {
         btnVerlassen.setFont(new Font("Arial", Font.PLAIN, 24));
         btnVerlassen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Aktion: Verein verlassen");
+                openVereinverlassenFormular();
             }
         });
         btnVerlassen.setBounds(250, 180, 300, 50);
@@ -321,4 +322,36 @@ public class Vereinsverwaltung extends JFrame {
         
         manschaftVerlassenFrame.setVisible(true);
     } 
+    
+    private void openVereinverlassenFormular()
+    {
+        VereinVerlassenFrame = new JFrame("Verein verlassen");
+        VereinVerlassenFrame.setBounds(100,100,800,600);
+        JPanel panel = new JPanel();
+        VereinVerlassenFrame.getContentPane().add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblEmail = new JLabel("E-Mail:");
+        lblEmail.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblEmail.setBounds(100, 100, 100, 20);
+        panel.add(lblEmail);
+
+        JTextField textFieldEmail = new JTextField();
+        textFieldEmail.setBounds(250, 100, 300, 30);
+        panel.add(textFieldEmail);
+        textFieldEmail.setColumns(10);
+
+        JLabel lblPasswort = new JLabel("Passwort:");
+        lblPasswort.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblPasswort.setBounds(100, 150, 100, 20);
+        panel.add(lblPasswort);
+
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setBounds(250, 150, 300, 30);
+        panel.add(passwordField);
+        
+        VereinVerlassenFrame.setVisible(true);
+    }
+    
+    
 }
