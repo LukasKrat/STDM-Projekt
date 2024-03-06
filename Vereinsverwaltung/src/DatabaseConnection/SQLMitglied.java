@@ -90,10 +90,26 @@ public class SQLMitglied {
          
             Mitglied newMitglied = getByEmail(email).get(0);
             
-            connection.close();
+            return newMitglied;
             
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());
+        }
+        return null;
+    }
+    
+    public static Mitglied delete (int M_ID) {
+        Connection connection = new SQLConnection().activeVerbindung;
+
+        String query = "DELETE FROM Mitglied WHERE M_ID=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, M_ID);
+            preparedStatement.executeUpdate();
+            System.out.println("Removal was successful");
+
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
         }
         return null;
     }
