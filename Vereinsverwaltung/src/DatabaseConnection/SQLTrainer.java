@@ -92,5 +92,22 @@ public class SQLTrainer {
         }
         return null;
     }
+    
+        
+     public static Trainer delete (int T_ID) {
+        Connection connection = new SQLConnection().activeVerbindung;
+
+        String query = "DELETE FROM Trainer WHERE T_ID=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, T_ID);
+            preparedStatement.executeUpdate();
+            System.out.println("Removal was successful");
+
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return null;
+    }
 }
 

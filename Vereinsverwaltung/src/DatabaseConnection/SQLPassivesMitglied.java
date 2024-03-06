@@ -97,5 +97,21 @@ public class SQLPassivesMitglied {
         }
         return null;
     }
+    
+     public static PassivesMitglied delete (int PM_ID) {
+        Connection connection = new SQLConnection().activeVerbindung;
+
+        String query = "DELETE FROM PassivMitglied WHERE PM_ID=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, PM_ID);
+            preparedStatement.executeUpdate();
+            System.out.println("Removal was successful");
+
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return null;
+    }
 }
 
