@@ -31,6 +31,7 @@ public class Vereinsverwaltung extends JFrame {
     private JFrame manschaftBeitretenFrame;
     private JFrame manschaftVerlassenFrame;
     private JFrame VereinVerlassenFrame;
+    private JFrame VerwalterUebersichtsFrame;
             
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -53,15 +54,15 @@ public class Vereinsverwaltung extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JButton btnVereinBeitreten = new JButton("Verein beitreten");
-        btnVereinBeitreten.setFont(new Font("Arial", Font.PLAIN, 24));
-        btnVereinBeitreten.addActionListener(new ActionListener() {
+        JButton btnViewUsers = new JButton("Verein beitreten");
+        btnViewUsers.setFont(new Font("Arial", Font.PLAIN, 24));
+        btnViewUsers.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 openVereinBeitretenFormular();
             }
         });
-        btnVereinBeitreten.setBounds(250, 100, 300, 50);
-        contentPane.add(btnVereinBeitreten);
+        btnViewUsers.setBounds(250, 100, 300, 50);
+        contentPane.add(btnViewUsers);
 
         JButton btnVerlassen = new JButton("Verein verlassen");
         btnVerlassen.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -351,7 +352,65 @@ public class Vereinsverwaltung extends JFrame {
         panel.add(passwordField);
         
         VereinVerlassenFrame.setVisible(true);
+    } 
+    
+    public void openVerwalterUebersichtsForm() {
+        VerwalterUebersichtsFrame = new JFrame("Verwalter Übersicht");
+        VerwalterUebersichtsFrame.setBounds(100,100,800,600);
+        JPanel panel = new JPanel();
+        VerwalterUebersichtsFrame.getContentPane().add(panel);
+        panel.setLayout(null);
+
+        JButton btnViewUsers = new JButton("User Übersicht");
+        btnViewUsers.setFont(new Font("Arial", Font.PLAIN, 24));
+        btnViewUsers.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openVereinBeitretenFormular();
+            }
+        });
+        btnViewUsers.setBounds(250, 100, 300, 50);
+        VerwalterUebersichtsFrame.add(btnViewUsers);
+
+        JButton btnVerlassen = new JButton("Verein verlassen");
+        btnVerlassen.setFont(new Font("Arial", Font.PLAIN, 24));
+        btnVerlassen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openVereinverlassenFormular();
+            }
+        });
+        btnVerlassen.setBounds(250, 180, 300, 50);
+        VerwalterUebersichtsFrame.add(btnVerlassen);
+
+        JButton btnBeitreten = new JButton("Mannschaft beitreten");
+        btnBeitreten.setFont(new Font("Arial", Font.PLAIN, 24));
+        btnBeitreten.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openMannschaftBeitretenFormular();
+            }
+        });
+        btnBeitreten.setBounds(250, 260, 300, 50);
+        VerwalterUebersichtsFrame.add(btnBeitreten);
+
+        JButton btnVerlassen_1 = new JButton("Mannschaft verlassen");
+        btnVerlassen_1.setFont(new Font("Arial", Font.PLAIN, 24));
+        btnVerlassen_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openManschaftverlassenFormular();
+            }
+        });
+        btnVerlassen_1.setBounds(250, 340, 300, 50);
+        VerwalterUebersichtsFrame.add(btnVerlassen_1);
+
+        JButton btnAnmelden = new JButton("Als Verwalter anmelden");
+        btnAnmelden.setFont(new Font("Arial", Font.PLAIN, 24));
+        btnAnmelden.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openVerwalterAnmeldungFormular();
+            }
+        });
+        btnAnmelden.setBounds(250, 420, 300, 50);
+        VerwalterUebersichtsFrame.add(btnAnmelden);
+        
+        VerwalterUebersichtsFrame.setVisible(true);
     }
-    
-    
 }
