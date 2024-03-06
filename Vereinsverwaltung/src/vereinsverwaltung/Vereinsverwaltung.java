@@ -226,7 +226,7 @@ public class Vereinsverwaltung extends JFrame {
                     // Hier können Sie den Code zur Überprüfung der Anmeldeinformationen des Verwalters implementieren
                     System.out.println("E-Mail: " + email + ", Passwort: " + passwort);
                     JOptionPane.showMessageDialog(null, "Erfolgreich als Verwalter angemeldet.");
-                    openAntragsBearbeitungsFenster(); // Öffnen Sie das Fenster zur Bearbeitung von Anträgen
+                    openVerwalterUebersichtsForm(); // Öffnen Sie das Fenster zur Bearbeitung von Anträgen
                     verwalterAnmeldungFrame.dispose();
                 }
             }
@@ -236,15 +236,6 @@ public class Vereinsverwaltung extends JFrame {
 
         verwalterAnmeldungFrame.setVisible(true);
     }
-    
-    private void openAntragsBearbeitungsFenster() {
-        JFrame antragsBearbeitungFrame = new JFrame("Antragsbearbeitung");
-        antragsBearbeitungFrame.setBounds(100, 100, 800, 600);
-        // Hier können Sie die Benutzeroberfläche für das Fenster zur Bearbeitung von Anträgen erstellen
-        // Zum Beispiel: Schaltflächen zum Genehmigen oder Ablehnen von Anträgen
-        antragsBearbeitungFrame.setVisible(true);
-    }
-
     
     private void openMannschaftBeitretenFormular()
     {
@@ -362,54 +353,14 @@ public class Vereinsverwaltung extends JFrame {
         panel.setLayout(null);
 
         JButton btnViewUsers = new JButton("User Übersicht");
-        btnViewUsers.setFont(new Font("Arial", Font.PLAIN, 24));
+        btnViewUsers.setFont(new Font("Arial", Font.PLAIN, 18));
         btnViewUsers.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openVereinBeitretenFormular();
+                //was soll auf dem Button passieren
             }
         });
         btnViewUsers.setBounds(250, 100, 300, 50);
-        VerwalterUebersichtsFrame.add(btnViewUsers);
-
-        JButton btnVerlassen = new JButton("Verein verlassen");
-        btnVerlassen.setFont(new Font("Arial", Font.PLAIN, 24));
-        btnVerlassen.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                openVereinverlassenFormular();
-            }
-        });
-        btnVerlassen.setBounds(250, 180, 300, 50);
-        VerwalterUebersichtsFrame.add(btnVerlassen);
-
-        JButton btnBeitreten = new JButton("Mannschaft beitreten");
-        btnBeitreten.setFont(new Font("Arial", Font.PLAIN, 24));
-        btnBeitreten.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                openMannschaftBeitretenFormular();
-            }
-        });
-        btnBeitreten.setBounds(250, 260, 300, 50);
-        VerwalterUebersichtsFrame.add(btnBeitreten);
-
-        JButton btnVerlassen_1 = new JButton("Mannschaft verlassen");
-        btnVerlassen_1.setFont(new Font("Arial", Font.PLAIN, 24));
-        btnVerlassen_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                openManschaftverlassenFormular();
-            }
-        });
-        btnVerlassen_1.setBounds(250, 340, 300, 50);
-        VerwalterUebersichtsFrame.add(btnVerlassen_1);
-
-        JButton btnAnmelden = new JButton("Als Verwalter anmelden");
-        btnAnmelden.setFont(new Font("Arial", Font.PLAIN, 24));
-        btnAnmelden.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                openVerwalterAnmeldungFormular();
-            }
-        });
-        btnAnmelden.setBounds(250, 420, 300, 50);
-        VerwalterUebersichtsFrame.add(btnAnmelden);
+        panel.add(btnViewUsers);
         
         VerwalterUebersichtsFrame.setVisible(true);
     }
