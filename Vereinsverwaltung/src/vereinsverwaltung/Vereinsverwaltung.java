@@ -35,9 +35,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import vereinsverwaltung.data.Mitglied;
-import vereinsverwaltung.data.VereinsAbteilung;
-import vereinsverwaltung.gui.ButtonEditor;
-import vereinsverwaltung.gui.ButtonRenderer;
+import vereinsverwaltung.data.*;
 import vereinsverwaltung.gui.ButtonColumn;
 
 public class Vereinsverwaltung extends JFrame {
@@ -72,21 +70,21 @@ public class Vereinsverwaltung extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JButton btnVereinBeitreten = new JButton("Verein beitreten");
-        btnVereinBeitreten.setFont(new Font("Arial", Font.PLAIN, 24));
-        btnVereinBeitreten.addActionListener(new ActionListener() {
+        JButton btnViewUsers = new JButton("Verein beitreten");
+        btnViewUsers.setFont(new Font("Arial", Font.PLAIN, 24));
+        btnViewUsers.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 openVereinBeitretenFormular();
             }
         });
-        btnVereinBeitreten.setBounds(250, 100, 300, 50);
-        contentPane.add(btnVereinBeitreten);
+        btnViewUsers.setBounds(250, 100, 300, 50);
+        contentPane.add(btnViewUsers);
 
         JButton btnVerlassen = new JButton("Verein verlassen");
         btnVerlassen.setFont(new Font("Arial", Font.PLAIN, 24));
         btnVerlassen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Aktion: Verein verlassen");
+                //openVereinverlassenFormular();
             }
         });
         btnVerlassen.setBounds(250, 180, 300, 50);
@@ -117,7 +115,7 @@ public class Vereinsverwaltung extends JFrame {
         btnMitgliederListe.setFont(new Font("Arial", Font.PLAIN, 24));
         btnMitgliederListe.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openMitgliederListe();
+                openMitgliederListen();
             }
         });
         
@@ -259,6 +257,7 @@ public class Vereinsverwaltung extends JFrame {
                     // Hier können Sie den Code zur Überprüfung der Anmeldeinformationen des Verwalters implementieren
                     System.out.println("E-Mail: " + email + ", Passwort: " + passwort);
                     JOptionPane.showMessageDialog(null, "Erfolgreich als Verwalter angemeldet.");
+                    //openVerwalterUebersichtsForm(); // Öffnen Sie das Fenster zur Bearbeitung von Anträgen
                     verwalterAnmeldungFrame.dispose();
                 }
             }
@@ -346,7 +345,7 @@ public class Vereinsverwaltung extends JFrame {
         
         manschaftVerlassenFrame.setVisible(true);
     } 
-    private void openMitgliederListe()
+    private void openMitgliederListen()
     {
         mitgliederListeFrame = new JFrame("MitgliederListen");
         mitgliederListeFrame.setBounds(100,100,1000,800);
@@ -379,14 +378,14 @@ public class Vereinsverwaltung extends JFrame {
                     verwalter = "nein";
                 }
             
-            JButton btnMitgliedBearbeiten = new JButton("Bearbeiten");
+            /*JButton btnMitgliedBearbeiten = new JButton("Bearbeiten");
             btnMitgliedBearbeiten.setFont(new Font("Arial", Font.PLAIN, 18));
             
             btnMitgliedBearbeiten.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                    openMitgliedBearbeitenFormular(mitglied.getId());
                 }
-            });
+            });*/
             
             //VereinsAbteilung abteilung = SQLVerwaltung.getByID(mitglied.getAbteilung_id());
             
@@ -415,32 +414,78 @@ public class Vereinsverwaltung extends JFrame {
         //mitgliederTable.getColumn("Bearbeiten").setCellRenderer(new ButtonRenderer());
         //mitgliederTable.getColumn("Bearbeiten").setCellEditor(new ButtonEditor(new JCheckBox()));
         
-        Action bearbeiten = new AbstractAction() {
+        Action mitgliederBearbeiten = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JTable table = (JTable)e.getSource();
                 int modelRow = Integer.valueOf(e.getActionCommand());
                 System.out.println(modelRow);
                 openMitgliedBearbeitenFormular(mitglieder.get(modelRow).getId());
             }
         };
         
-        ButtonColumn buttonColumn = new ButtonColumn(mitgliederTable, bearbeiten, 7);
+        ButtonColumn buttonColumnMitglieder = new ButtonColumn(mitgliederTable, mitgliederBearbeiten, 7);
         
         JScrollPane mitgliederPane = new JScrollPane(mitgliederTable);
         panel.addTab("Mitglieder",mitgliederPane);
         
-        //mitgliederListeFrame.add(panel);
+        DefaultTableModel abteilungsModel = new DefaultTableModel();
         
+        abteilungsModel.addColumn("Name");
+        abteilungsModel.addColumn("Bearbeiten");
+        
+        ArrayList<VereinsAbteilung> abteilungen = SQLVerwaltung.getAll();
+        
+        for(VereinsAbteilung abteilung: abteilungen){
+            abteilungsModel.addRow(new Object[]{
+                abteilung.getName(),
+                "Bearbeiten"
+            });
+        }
+        JTable abteilungTable = new JTable(abteilungsModel){
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                if(colIndex == 1){
+                    return true;
+                }
+                return false;
+            }
+        };
+        
+        Action abteilungBearbeiten = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int modelRow = Integer.valueOf(e.getActionCommand());
+                System.out.println(modelRow);
+                openMitgliedBearbeitenFormular(mitglieder.get(modelRow).getId());
+            }
+        };
+        
+        ButtonColumn buttonColumnAbteilung = new ButtonColumn(abteilungTable, abteilungBearbeiten, 1);
+        
+        JScrollPane abteilungPane = new JScrollPane(abteilungTable);
+        panel.addTab("Abteilungen",abteilungPane);
         
         mitgliederListeFrame.setVisible(true);
-    } 
+    }
+    
     private void openMitgliedBearbeitenFormular(int id){
         mitgliedBearbeitenFrame = new JFrame("Mitglied Bearbeiten");
         mitgliedBearbeitenFrame.setBounds(100,100,1000,800);
         JPanel panel = new JPanel();
         mitgliedBearbeitenFrame.getContentPane().add(panel);
         //panel.setLayout(null);
+        ArrayList<Mitglied> mitglieder = SQLMitglied.getAll();
+        Mitglied mitglied = null;
+        for(Mitglied zMitglied: mitglieder){
+            if(zMitglied.getId() == id){
+                mitglied = zMitglied;
+                JOptionPane.showMessageDialog(mitgliedBearbeitenFrame, "Mitglied " + mitglied.getVorname() + " gefunden");
+                
+            }
+        }
+        if(mitglied == null){
+            JOptionPane.showMessageDialog(mitgliedBearbeitenFrame, "Mitglied nicht gefunden");
+        }
         
         mitgliedBearbeitenFrame.setVisible(true);
     }
