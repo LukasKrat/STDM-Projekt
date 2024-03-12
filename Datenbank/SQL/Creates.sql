@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS 'Mitglied'(
 	'Vorname' char(50) NOT NULL,
 	'Nachname' char(50) NOT NULL,
 	'TelefonNR' char(20),
-	'E-Mail' char(50) NOT NULL,
+	'Email' char(50) NOT NULL,
 	'Adresse' char(100) NOT NULL,
 	'Abteilungs_ID' INT DEFAULT NULL,
 	'Passwort' char(10) NOT NULL,

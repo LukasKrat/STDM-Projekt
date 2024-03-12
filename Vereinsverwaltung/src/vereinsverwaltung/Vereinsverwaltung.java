@@ -143,25 +143,25 @@ public class Vereinsverwaltung extends JFrame {
         vereinsBeitrittFrame.getContentPane().add(panel);
         panel.setLayout(null);
 
-        JLabel lblName = new JLabel("Name:");
-        lblName.setFont(new Font("Arial", Font.PLAIN, 18));
-        lblName.setBounds(100, 100, 100, 20);
-        panel.add(lblName);
+        JLabel lblVName = new JLabel("Vorname:");
+        lblVName.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblVName.setBounds(100, 100, 100, 20);
+        panel.add(lblVName);
 
-        JTextField textFieldName = new JTextField();
-        textFieldName.setBounds(250, 100, 300, 30);
-        panel.add(textFieldName);
-        textFieldName.setColumns(10);
+        JTextField textFieldVName = new JTextField();
+        textFieldVName.setBounds(250, 100, 300, 30);
+        panel.add(textFieldVName);
+        textFieldVName.setColumns(10);
 
-        JLabel lblGebDat = new JLabel("Geburtsdatum:");
-        lblGebDat.setFont(new Font("Arial", Font.PLAIN, 18));
-        lblGebDat.setBounds(100, 150, 150, 20);
-        panel.add(lblGebDat);
+        JLabel lblNName = new JLabel("Nachname:");
+        lblNName.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblNName.setBounds(100, 150, 150, 20);
+        panel.add(lblNName);
 
-        JTextField textFieldGebDat = new JTextField();
-        textFieldGebDat.setBounds(250, 150, 300, 30);
-        panel.add(textFieldGebDat);
-        textFieldGebDat.setColumns(10);
+        JTextField textFieldNName = new JTextField();
+        textFieldNName.setBounds(250, 150, 300, 30);
+        panel.add(textFieldNName);
+        textFieldNName.setColumns(10);
 
         JLabel lblAdresse = new JLabel("Adresse:");
         lblAdresse.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -192,21 +192,33 @@ public class Vereinsverwaltung extends JFrame {
         textFieldTelefonnummer.setBounds(250, 300, 300, 30);
         panel.add(textFieldTelefonnummer);
         textFieldTelefonnummer.setColumns(10);
+        
+        JLabel lblPasswort = new JLabel("Passwort:");
+        lblPasswort.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblPasswort.setBounds(100, 350, 150, 20);
+        panel.add(lblPasswort);
+
+        JTextField textFieldPasswort = new JTextField();
+        textFieldPasswort.setBounds(250, 350, 300, 30);
+        panel.add(textFieldPasswort);
+        textFieldPasswort.setColumns(10);
 
         JButton btnBestaetigen = new JButton("Bestätigen");
         btnBestaetigen.setFont(new Font("Arial", Font.PLAIN, 18));
         btnBestaetigen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = textFieldName.getText();
-                String gebDat = textFieldGebDat.getText();
+                String vname = textFieldVName.getText();
+                String nname = textFieldNName.getText();
                 String adresse = textFieldAdresse.getText();
                 String email = textFieldEmail.getText();
                 String telefonnummer = textFieldTelefonnummer.getText();
+                String passwort = textFieldPasswort.getText();
 
-                if (name.isEmpty() || gebDat.isEmpty() || adresse.isEmpty() || email.isEmpty() || telefonnummer.isEmpty()) {
+                if (vname.isEmpty() || nname.isEmpty() || adresse.isEmpty() || email.isEmpty() || telefonnummer.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Bitte füllen Sie alle Felder aus.");
                 } else {
-                    System.out.println("Name: " + name + ", Geburtsdatum: " + gebDat + ", Adresse: " + adresse + ", E-Mail: " + email + ", Telefonnummer: " + telefonnummer);
+                    System.out.println("Vorname: " + vname + ", Nachname: " + nname + ", Adresse: " + adresse + ", E-Mail: " + email + ", Telefonnummer: " + telefonnummer);
+                    SQLMitglied.insert(vname, nname, email, email, adresse, 0, passwort, false);
                     JOptionPane.showMessageDialog(null, "Das Formular wurde bestätigt. Sie sind dem Verein beigetreten.");
                     vereinsBeitrittFrame.dispose();
                 }
@@ -333,15 +345,19 @@ public class Vereinsverwaltung extends JFrame {
         JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(250, 150, 300, 30);
         panel.add(passwordField);
-        
+        /*
+        //Mannschaft verlassen braucht keine Combobok, da man nur in einer Mannschaft gleichzeitug sein kann    
         JLabel lblManschaft = new JLabel("Manschaft:");
         lblManschaft.setFont(new Font("Arial", Font.PLAIN, 18));
         lblManschaft.setBounds(100, 200, 100, 20);
         panel.add(lblManschaft);
         
+            
+        
         JComboBox comboboxManschaft = new JComboBox();
         comboboxManschaft.setBounds(250, 200, 300, 30);
         panel.add(comboboxManschaft);
+        */
         
         manschaftVerlassenFrame.setVisible(true);
     } 
@@ -472,20 +488,149 @@ public class Vereinsverwaltung extends JFrame {
         mitgliedBearbeitenFrame = new JFrame("Mitglied Bearbeiten");
         mitgliedBearbeitenFrame.setBounds(100,100,1000,800);
         JPanel panel = new JPanel();
+        panel.setLayout(null);
         mitgliedBearbeitenFrame.getContentPane().add(panel);
         //panel.setLayout(null);
-        ArrayList<Mitglied> mitglieder = SQLMitglied.getAll();
-        Mitglied mitglied = null;
-        for(Mitglied zMitglied: mitglieder){
-            if(zMitglied.getId() == id){
-                mitglied = zMitglied;
-                JOptionPane.showMessageDialog(mitgliedBearbeitenFrame, "Mitglied " + mitglied.getVorname() + " gefunden");
-                
-            }
-        }
+        Mitglied mitglied = SQLMitglied.getById(id).get(0);
         if(mitglied == null){
             JOptionPane.showMessageDialog(mitgliedBearbeitenFrame, "Mitglied nicht gefunden");
+            mitgliedBearbeitenFrame.dispose();
         }
+        else{
+            //JOptionPane.showMessageDialog(mitgliedBearbeitenFrame, "Mitglied " + mitglied.getVorname() + " gefunden");
+        }
+        
+        ArrayList<VereinsAbteilung> abteilungen = SQLVerwaltung.getAll();
+        
+        JLabel lblVName = new JLabel("Vorname:");
+        lblVName.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblVName.setBounds(100, 100, 100, 20);
+        panel.add(lblVName);
+
+        JTextField textFieldVName = new JTextField();
+        textFieldVName.setBounds(250, 100, 300, 30);
+        panel.add(textFieldVName);
+        textFieldVName.setColumns(10);
+        textFieldVName.setText(mitglied.getVorname());
+        
+        JLabel lblNName = new JLabel("Nachname:");
+        lblNName.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblNName.setBounds(100, 150, 100, 20);
+        panel.add(lblNName);
+        lblNName.setText(mitglied.getNachname());
+
+        JTextField textFieldName = new JTextField();
+        textFieldName.setBounds(250, 150, 300, 30);
+        panel.add(textFieldName);
+        textFieldName.setColumns(10);
+        textFieldName.setText(mitglied.getNachname());
+
+        JLabel lblAdresse = new JLabel("Adresse:");
+        lblAdresse.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblAdresse.setBounds(100, 200, 100, 20);
+        panel.add(lblAdresse);
+
+        JTextField textFieldAdresse = new JTextField();
+        textFieldAdresse.setBounds(250, 200, 300, 30);
+        panel.add(textFieldAdresse);
+        textFieldAdresse.setColumns(10);
+        textFieldAdresse.setText(mitglied.getAdresse());
+
+        JLabel lblEmail = new JLabel("E-Mail:");
+        lblEmail.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblEmail.setBounds(100, 250, 100, 20);
+        panel.add(lblEmail);
+
+        JTextField textFieldEmail = new JTextField();
+        textFieldEmail.setBounds(250, 250, 300, 30);
+        panel.add(textFieldEmail);
+        textFieldEmail.setColumns(10);
+        textFieldEmail.setText(mitglied.getEmail());
+
+        JLabel lblTelefonnummer = new JLabel("Telefonnummer:");
+        lblTelefonnummer.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblTelefonnummer.setBounds(100, 300, 150, 20);
+        panel.add(lblTelefonnummer);
+
+        JTextField textFieldTelefonnummer = new JTextField();
+        textFieldTelefonnummer.setBounds(250, 300, 300, 30);
+        panel.add(textFieldTelefonnummer);
+        textFieldTelefonnummer.setColumns(10);
+        textFieldTelefonnummer.setText(mitglied.getTelefon());
+        
+        JLabel lblAbteilung = new JLabel("Abteilung:");
+        lblAbteilung.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblAbteilung.setBounds(100, 350, 150, 20);
+        panel.add(lblAbteilung);
+
+        JComboBox<VereinsAbteilung> cBAbteilungen = new JComboBox();
+        cBAbteilungen.setBounds(250, 350, 300, 30);
+        panel.add(cBAbteilungen);
+        for(VereinsAbteilung abteilung: abteilungen){
+            cBAbteilungen.addItem(abteilung);
+        }
+        VereinsAbteilung mitgliedsAbteilung = SQLVerwaltung.getById(mitglied.getAbteilung_id()).get(0);
+        cBAbteilungen.getModel().setSelectedItem(mitgliedsAbteilung);
+        
+        
+        JLabel lblPasswort = new JLabel("Passwort:");
+        lblPasswort.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblPasswort.setBounds(100, 400, 150, 20);
+        panel.add(lblPasswort);
+
+        JTextField textFieldPasswort = new JTextField();
+        textFieldPasswort.setBounds(250, 400, 300, 30);
+        panel.add(textFieldPasswort);
+        textFieldPasswort.setColumns(10);
+        textFieldPasswort.setText(mitglied.getPasswort());
+        
+        JLabel lblVerwalter = new JLabel("Verwalter:");
+        lblVerwalter.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblVerwalter.setBounds(100, 450, 150, 20);
+        panel.add(lblVerwalter);
+
+        JComboBox<String> cBVerwalter = new JComboBox();
+        cBVerwalter.setBounds(250, 450, 300, 30);
+        panel.add(cBVerwalter);
+        cBVerwalter.addItem("Nein");
+        cBVerwalter.addItem("Ja");
+        if(mitglied.getIstVerwalter()){
+            cBVerwalter.getModel().setSelectedItem("Ja");
+        }
+        else{
+            cBVerwalter.getModel().setSelectedItem("Nein");
+        }
+        
+        JButton btnSave = new JButton("Speichern");
+        btnSave.setBounds(250, 500, 150,30);
+        btnSave.setFont(new Font("Arial", Font.PLAIN, 18));
+        btnSave.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+                boolean istVerwalter;
+                istVerwalter = cBVerwalter.getSelectedIndex() != 0;
+                
+                VereinsAbteilung zAbteilung = (VereinsAbteilung)cBAbteilungen.getSelectedItem();
+                
+                Mitglied pMitglied = new Mitglied(textFieldVName.getText(), textFieldName.getText(), textFieldTelefonnummer.getText(), textFieldEmail.getText(), textFieldAdresse.getText(), zAbteilung.getId(), mitglied.getId(), istVerwalter, textFieldPasswort.getText());
+                
+                
+                boolean complete = SQLMitglied.update(pMitglied.getId(), pMitglied.getVorname(), pMitglied.getNachname(), pMitglied.getTelefon(), pMitglied.getEmail(), pMitglied.getAdresse(), pMitglied.getAbteilung_id(), pMitglied.getPasswort(), pMitglied.getIstVerwalter());
+                
+                if(complete){
+                    JOptionPane.showMessageDialog(mitgliedBearbeitenFrame, "Daten gespeichert");
+                    mitgliedBearbeitenFrame.dispose();
+                    openMitgliederListen();
+                    mitgliederListeFrame.dispose();
+                    
+                }else{
+                    JOptionPane.showMessageDialog(mitgliedBearbeitenFrame, "Datenspeicherung Fehlgeschlagen!");
+                }
+                
+                
+            } 
+        });
+        panel.add(btnSave);
         
         mitgliedBearbeitenFrame.setVisible(true);
     }
