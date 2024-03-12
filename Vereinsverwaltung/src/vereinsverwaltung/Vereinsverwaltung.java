@@ -345,15 +345,19 @@ public class Vereinsverwaltung extends JFrame {
         JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(250, 150, 300, 30);
         panel.add(passwordField);
-        
+        /*
+        //Mannschaft verlassen braucht keine Combobok, da man nur in einer Mannschaft gleichzeitug sein kann    
         JLabel lblManschaft = new JLabel("Manschaft:");
         lblManschaft.setFont(new Font("Arial", Font.PLAIN, 18));
         lblManschaft.setBounds(100, 200, 100, 20);
         panel.add(lblManschaft);
         
+            
+        
         JComboBox comboboxManschaft = new JComboBox();
         comboboxManschaft.setBounds(250, 200, 300, 30);
         panel.add(comboboxManschaft);
+        */
         
         manschaftVerlassenFrame.setVisible(true);
     } 
