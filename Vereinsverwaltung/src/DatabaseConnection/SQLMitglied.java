@@ -73,6 +73,36 @@ public class SQLMitglied {
         return Result;
     }
     
+    public static ArrayList<Mitglied> getById(int pId) {
+        Connection connection = new SQLConnection().activeVerbindung;
+        ArrayList<Mitglied> Result = new ArrayList<Mitglied>();
+
+        String query = "SELECT * FROM Mitglied WHERE M_ID=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, pId);
+              
+             ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                    int id = resultSet.getInt("M_ID");
+                    String vorname = resultSet.getString("Vorname");
+                    String nachname = resultSet.getString("Nachname");
+                    String telefonNr = resultSet.getString("TelefonNR");
+                    String email = resultSet.getString("E-Mail");
+                    String adresse = resultSet.getString("Adresse");
+                    int abteilungsId = resultSet.getInt("Abteilungs_ID");
+                    String passwort = resultSet.getString("Passwort");
+                    boolean verwalter = resultSet.getBoolean("Verwalter");
+                
+                Mitglied obj = new Mitglied(vorname, nachname, telefonNr, email, adresse, abteilungsId, id, verwalter, passwort);
+                Result.add(obj);
+            }
+        } catch (SQLException e) {
+            System.err.println("Connection error: " + e.getMessage());
+                }
+        return Result;
+    }
+    
     public static Mitglied insert (String vorname, String nachname, String telNr, String email, String adresse, int abteilungsId, String passwort, boolean istVerwalter) {
         Connection connection = new SQLConnection().activeVerbindung;
         
