@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.sqlite.SQLiteConnection;
 import vereinsverwaltung.data.Mitglied;
 
 /**
@@ -96,6 +97,31 @@ public class SQLMitglied {
             System.err.println("Connection error: " + e.getMessage());
         }
         return null;
+    }
+    
+    public static Boolean update(int M_ID, String vorname, String nachname, String telNr, String email, String adresse, int abteilungsId, String passwort, boolean istVerwalter){
+        
+        Connection connection = new SQLConnection().activeVerbindung;
+        
+        String query = "UPDATE MITGLIED SET Vorname = ?, Nachname = ?, TelefonNR = ?, `E-Mail` = ?, Adresse = ?, Abteilungs_ID = ?, passwort = ?, Verwalter = ?";
+        
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, vorname);
+            preparedStatement.setString(2, nachname);
+            preparedStatement.setString(3, telNr);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5, adresse);
+            preparedStatement.setInt(6, abteilungsId);
+            preparedStatement.setString(7, passwort);
+            preparedStatement.setBoolean(8, istVerwalter);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e){
+            System.err.println("Error: " + e.getMessage());
+            return false;
+        }
+        return true;
     }
     
     public static Mitglied delete (int M_ID) {
