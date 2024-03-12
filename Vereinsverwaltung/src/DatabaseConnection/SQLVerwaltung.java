@@ -30,6 +30,7 @@ public class SQLVerwaltung {
                 String name = resultSet.getString("Name");
                 
                 VereinsAbteilung obj = new VereinsAbteilung(vaId, name);
+                Result.add(obj);
             }
         } catch (SQLException e) {
             System.err.println("Connection error: " + e.getMessage());

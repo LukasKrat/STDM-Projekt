@@ -3,7 +3,7 @@ INSERT INTO VereinsAbteilung (VA_ID, Name) VALUES
 	(1, 'Fußball')
 ;
 
-INSERT INTO Mitglied (M_ID, Vorname, Nachname, TelefonNR, E-Mail, Adresse, Abteilungs_ID, Passwort, Verwalter) VALUES
+INSERT INTO Mitglied (M_ID, Vorname, Nachname, TelefonNR, Email, Adresse, Abteilungs_ID, Passwort, Verwalter) VALUES
 	(1, 'Max', 'Mustermann', '080056782', 'Max@Mustermann.de', 'Musterstraße 2', 1, '1234567890', 0),
 	(2, 'Maxi', 'Mustermann', '0800567822', 'Maxi@Mustermann.de', 'Musterstraße 2', 0, '2345678901', 1),
 	(3, 'Maxii', 'Mustermann', '08005678222', 'Maxii@Mustermann.de', 'Musterstraße 2', 0, '3456789012', 0),

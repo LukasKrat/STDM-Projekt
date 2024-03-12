@@ -28,7 +28,7 @@ public class SQLMitglied {
                     String vorname = resultSet.getString("Vorname");
                     String nachname = resultSet.getString("Nachname");
                     String telefonNr = resultSet.getString("TelefonNR");
-                    String email = resultSet.getString("EMail");
+                    String email = resultSet.getString("Email");
                     String adresse = resultSet.getString("Adresse");
                     int abteilungsId = resultSet.getInt("Abteilungs_ID");
                     String passwort = resultSet.getString("Passwort");
@@ -47,7 +47,7 @@ public class SQLMitglied {
         Connection connection = new SQLConnection().activeVerbindung;
         ArrayList<Mitglied> Result = new ArrayList<Mitglied>();
 
-        String query = "SELECT * FROM Mitglied WHERE EMail=?;";
+        String query = "SELECT * FROM Mitglied WHERE Email=?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, pEmail);
@@ -58,7 +58,7 @@ public class SQLMitglied {
                     String vorname = resultSet.getString("Vorname");
                     String nachname = resultSet.getString("Nachname");
                     String telefonNr = resultSet.getString("TelefonNR");
-                    String email = resultSet.getString("EMail");
+                    String email = resultSet.getString("Email");
                     String adresse = resultSet.getString("Adresse");
                     int abteilungsId = resultSet.getInt("Abteilungs_ID");
                     String passwort = resultSet.getString("Passwort");
@@ -88,7 +88,7 @@ public class SQLMitglied {
                     String vorname = resultSet.getString("Vorname");
                     String nachname = resultSet.getString("Nachname");
                     String telefonNr = resultSet.getString("TelefonNR");
-                    String email = resultSet.getString("EMail");
+                    String email = resultSet.getString("Email");
                     String adresse = resultSet.getString("Adresse");
                     int abteilungsId = resultSet.getInt("Abteilungs_ID");
                     String passwort = resultSet.getString("Passwort");
@@ -106,7 +106,7 @@ public class SQLMitglied {
     public static Mitglied insert (String vorname, String nachname, String telNr, String email, String adresse, int abteilungsId, String passwort, boolean istVerwalter) {
         Connection connection = new SQLConnection().activeVerbindung;
         
-        String query = "INSERT INTO Mitglied(Vorname, Nachname, TelefonNR, EMail, Adresse, Abteilungs_ID, Passwort, Verwalter) VALUES(?,?,?,?,?,?,?,?);";
+        String query = "INSERT INTO Mitglied(Vorname, Nachname, TelefonNR, Email, Adresse, Abteilungs_ID, Passwort, Verwalter) VALUES(?,?,?,?,?,?,?,?);";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, vorname);
@@ -133,7 +133,7 @@ public class SQLMitglied {
         
         Connection connection = new SQLConnection().activeVerbindung;
         
-        String query = "UPDATE MITGLIED SET Vorname = ?, Nachname = ?, TelefonNR = ?, EMail = ?, Adresse = ?, Abteilungs_ID = ?, passwort = ?, Verwalter = ?";
+        String query = "UPDATE MITGLIED SET Vorname = ?, Nachname = ?, TelefonNR = ?, Email = ?, Adresse = ?, Abteilungs_ID = ?, passwort = ?, Verwalter = ?";
         
         
         try{
