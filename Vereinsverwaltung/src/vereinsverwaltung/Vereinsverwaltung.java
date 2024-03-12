@@ -143,25 +143,25 @@ public class Vereinsverwaltung extends JFrame {
         vereinsBeitrittFrame.getContentPane().add(panel);
         panel.setLayout(null);
 
-        JLabel lblName = new JLabel("Name:");
-        lblName.setFont(new Font("Arial", Font.PLAIN, 18));
-        lblName.setBounds(100, 100, 100, 20);
-        panel.add(lblName);
+        JLabel lblVName = new JLabel("Vorname:");
+        lblVName.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblVName.setBounds(100, 100, 100, 20);
+        panel.add(lblVName);
 
-        JTextField textFieldName = new JTextField();
-        textFieldName.setBounds(250, 100, 300, 30);
-        panel.add(textFieldName);
-        textFieldName.setColumns(10);
+        JTextField textFieldVName = new JTextField();
+        textFieldVName.setBounds(250, 100, 300, 30);
+        panel.add(textFieldVName);
+        textFieldVName.setColumns(10);
 
-        JLabel lblGebDat = new JLabel("Geburtsdatum:");
-        lblGebDat.setFont(new Font("Arial", Font.PLAIN, 18));
-        lblGebDat.setBounds(100, 150, 150, 20);
-        panel.add(lblGebDat);
+        JLabel lblNName = new JLabel("Nachname:");
+        lblNName.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblNName.setBounds(100, 150, 150, 20);
+        panel.add(lblNName);
 
-        JTextField textFieldGebDat = new JTextField();
-        textFieldGebDat.setBounds(250, 150, 300, 30);
-        panel.add(textFieldGebDat);
-        textFieldGebDat.setColumns(10);
+        JTextField textFieldNName = new JTextField();
+        textFieldNName.setBounds(250, 150, 300, 30);
+        panel.add(textFieldNName);
+        textFieldNName.setColumns(10);
 
         JLabel lblAdresse = new JLabel("Adresse:");
         lblAdresse.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -192,21 +192,32 @@ public class Vereinsverwaltung extends JFrame {
         textFieldTelefonnummer.setBounds(250, 300, 300, 30);
         panel.add(textFieldTelefonnummer);
         textFieldTelefonnummer.setColumns(10);
+        
+        JLabel lblPasswort = new JLabel("Passwort:");
+        lblPasswort.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblPasswort.setBounds(100, 350, 150, 20);
+        panel.add(lblPasswort);
+
+        JTextField textFieldPasswort = new JTextField();
+        textFieldPasswort.setBounds(250, 350, 300, 30);
+        panel.add(textFieldPasswort);
+        textFieldPasswort.setColumns(10);
 
         JButton btnBestaetigen = new JButton("Bestätigen");
         btnBestaetigen.setFont(new Font("Arial", Font.PLAIN, 18));
         btnBestaetigen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = textFieldName.getText();
-                String gebDat = textFieldGebDat.getText();
+                String vname = textFieldVName.getText();
+                String nname = textFieldNName.getText();
                 String adresse = textFieldAdresse.getText();
                 String email = textFieldEmail.getText();
                 String telefonnummer = textFieldTelefonnummer.getText();
 
-                if (name.isEmpty() || gebDat.isEmpty() || adresse.isEmpty() || email.isEmpty() || telefonnummer.isEmpty()) {
+                if (vname.isEmpty() || nname.isEmpty() || adresse.isEmpty() || email.isEmpty() || telefonnummer.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Bitte füllen Sie alle Felder aus.");
                 } else {
-                    System.out.println("Name: " + name + ", Geburtsdatum: " + gebDat + ", Adresse: " + adresse + ", E-Mail: " + email + ", Telefonnummer: " + telefonnummer);
+                    System.out.println("Vorname: " + vname + ", Nachname: " + nname + ", Adresse: " + adresse + ", E-Mail: " + email + ", Telefonnummer: " + telefonnummer);
+                    SQLMitglied.insert(vname, nname, email, email, adresse, 0, adresse, false);
                     JOptionPane.showMessageDialog(null, "Das Formular wurde bestätigt. Sie sind dem Verein beigetreten.");
                     vereinsBeitrittFrame.dispose();
                 }
