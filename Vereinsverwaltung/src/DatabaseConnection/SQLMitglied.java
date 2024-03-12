@@ -133,7 +133,7 @@ public class SQLMitglied {
         
         Connection connection = new SQLConnection().activeVerbindung;
         
-        String query = "UPDATE MITGLIED SET Vorname = ?, Nachname = ?, TelefonNR = ?, Email = ?, Adresse = ?, Abteilungs_ID = ?, passwort = ?, Verwalter = ?";
+        String query = "UPDATE MITGLIED SET Vorname = ?, Nachname = ?, TelefonNR = ?, Email = ?, Adresse = ?, Abteilungs_ID = ?, passwort = ?, Verwalter = ? WHERE M_ID = ?";
         
         
         try{
@@ -146,6 +146,7 @@ public class SQLMitglied {
             preparedStatement.setInt(6, abteilungsId);
             preparedStatement.setString(7, passwort);
             preparedStatement.setBoolean(8, istVerwalter);
+            preparedStatement.setInt(9, M_ID);
             preparedStatement.executeUpdate();
         } catch (SQLException e){
             System.err.println("Error: " + e.getMessage());
