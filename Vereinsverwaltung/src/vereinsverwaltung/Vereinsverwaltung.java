@@ -404,14 +404,14 @@ public class Vereinsverwaltung extends JFrame {
             });*/
             
             //VereinsAbteilung abteilung = SQLVerwaltung.getByID(mitglied.getAbteilung_id());
-            
+            String abtName = SQLVerwaltung.getById(mitglied.getAbteilung_id()).get(0).getName();
             mitgliederModel.addRow(new Object[]{
                 mitglied.getVorname(),
                 mitglied.getNachname(),
                 mitglied.getTelefon(),
                 mitglied.getEmail(),
                 mitglied.getAdresse(),
-                mitglied.getAbteilung_id(), //abteilung.getName();
+                abtName, //abteilung.getName();
                 verwalter,
                 "Bearbeiten"/*,
                 btnMitgliedBearbeiten*/
@@ -472,7 +472,7 @@ public class Vereinsverwaltung extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int modelRow = Integer.valueOf(e.getActionCommand());
                 System.out.println(modelRow);
-                openMitgliedBearbeitenFormular(mitglieder.get(modelRow).getId());
+                //openMitgliedBearbeitenFormular(mitglieder.get(modelRow).getId());
             }
         };
         
