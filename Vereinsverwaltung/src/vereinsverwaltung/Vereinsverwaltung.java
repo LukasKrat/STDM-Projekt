@@ -212,12 +212,13 @@ public class Vereinsverwaltung extends JFrame {
                 String adresse = textFieldAdresse.getText();
                 String email = textFieldEmail.getText();
                 String telefonnummer = textFieldTelefonnummer.getText();
+                String passwort = textFieldPasswort.getText();
 
                 if (vname.isEmpty() || nname.isEmpty() || adresse.isEmpty() || email.isEmpty() || telefonnummer.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Bitte füllen Sie alle Felder aus.");
                 } else {
                     System.out.println("Vorname: " + vname + ", Nachname: " + nname + ", Adresse: " + adresse + ", E-Mail: " + email + ", Telefonnummer: " + telefonnummer);
-                    SQLMitglied.insert(vname, nname, email, email, adresse, 0, adresse, false);
+                    SQLMitglied.insert(vname, nname, email, email, adresse, 0, passwort, false);
                     JOptionPane.showMessageDialog(null, "Das Formular wurde bestätigt. Sie sind dem Verein beigetreten.");
                     vereinsBeitrittFrame.dispose();
                 }
