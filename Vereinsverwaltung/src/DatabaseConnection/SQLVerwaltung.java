@@ -61,6 +61,30 @@ public class SQLVerwaltung {
         return Result;
     }
     
+    public static ArrayList<VereinsAbteilung> getById(int pID) {
+        Connection connection = new SQLConnection().activeVerbindung;
+        ArrayList<VereinsAbteilung> Result = new ArrayList<VereinsAbteilung>();
+
+        String query = "SELECT * FROM VereinsAbteilung WHERE VA_ID=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, pID);
+              
+             ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                    int id = resultSet.getInt("VA_ID");
+                    String name = resultSet.getString("Name");
+                
+                    VereinsAbteilung obj = new VereinsAbteilung(id, name);
+                    
+                    Result.add(obj);
+            }
+        } catch (SQLException e) {
+            System.err.println("Connection error: " + e.getMessage());
+                }
+        return Result;
+    }
+    
     public static VereinsAbteilung insert (String name) {
         Connection connection = new SQLConnection().activeVerbindung;
         
